@@ -187,8 +187,8 @@
       border-radius: 6px;
       height: 30px;
     }
-	
-	.footer1 {
+
+    .footer1 {
 	  text-align: left;
 	  font-size: 0.9em;
 	  margin-top: 30px;
@@ -205,7 +205,6 @@
   </style>
 </head>
 <body>
-
   <img src="https://i.imgur.com/8SCvUon.jpeg" alt="排球少年封面" class="title-image">
 
   <div class="header">
@@ -289,6 +288,7 @@
     <div class="toggle">
       <label>每日儲值禮包<div class="note">900 • 每日儲值禮包90元新台幣</div></label>
       <input type="checkbox" class="daily" value="900">
+	  
     </div>
 	<div class="toggle">
       <label>排球Pass禮包（通行證）<div class="note">3600 • 額外購買通行證190元新台幣</div></label>
@@ -356,31 +356,36 @@
 		<input type="number" id="current" value="0" />
 	</div>
 	<div class="input-row">
-		<label for="current1">
-			<img src="https://i.imgur.com/vUrY1hG.jpeg" alt="白金卷" style="width: 50px; height: 50px; vertical-align: middle; margin-right: 6px;">
+		<label for="custom-extra9">
+			<img src="https://i.imgur.com/vUrY1hG.jpeg" alt="白金券" style="width: 50px; height: 50px; vertical-align: middle; margin-right: 6px;">
 			白金券
 		</label>
-		<input type="number" id="current1" value="0" />
+		<input type="number" id="custom-extra9" value="0" />
 	</div>
+
 	<div class="input-row">
 		<label for="target-date">目標日期</label>
 		<input type="date" id="target-date" />
 	</div>
   </div>
-  
+
   <!-- 結果 -->
   <div class="section-title">結果</div>
   <div class="section result-box">
     <label for="result">預計可存到翅膀數量</label>
     <input type="text" id="result" readonly />
   </div>
-
+  <div class="section result-box">
+    <label for="draws">預計可存到抽數</label>
+    <input type="text" id="draws" readonly />
+  </div>
 
   <!-- 計算邏輯 -->
   <script>
     const currentInput = document.getElementById("current");
     const targetDateInput = document.getElementById("target-date");
     const resultInput = document.getElementById("result");
+    const drawsInput = document.getElementById("draws");
 
     function calcDays(start, end) {
       const ms = end - start;
@@ -399,37 +404,33 @@
       let total = parseInt(currentInput.value || 0);
 
       document.querySelectorAll(".daily:checked").forEach(el => {
-        total += parseInt(el.value) * days;
+        total += Math.floor(parseInt(el.value) * days);
       });
 
       document.querySelectorAll(".weekly:checked").forEach(el => {
-        total += parseInt(el.value) * weeks;
+        total += Math.floor(parseInt(el.value) * weeks);
       });
 
       document.querySelectorAll(".monthly:checked").forEach(el => {
-        total += parseInt(el.value) * months;
+        total += Math.floor(parseInt(el.value) * months);
       });
 
-      document.querySelectorAll(".extra:checked").forEach(el => {
-        total += parseInt(el.value);
-      });
+      total += Math.floor(parseInt(document.getElementById("custom-daily").value || 0) * days);
+      total += Math.floor(parseInt(document.getElementById("custom-weekly").value || 0) * weeks);
+      total += Math.floor(parseInt(document.getElementById("custom-monthly").value || 0) * months);
 
-      total += parseInt(document.getElementById("custom-daily").value || 0) * days;
-      total += parseInt(document.getElementById("custom-weekly").value || 0) * weeks;
-      total += parseInt(document.getElementById("custom-monthly").value || 0) * months;
-      total += parseInt(document.getElementById("custom-extra").value || 0); 
-	  //total += parseInt(document.getElementById("current1").value || 0) * 300;
-	  
-	  total += parseInt(document.getElementById("custom-extra1").value || 0)* 1250;
-	  total += parseInt(document.getElementById("custom-extra2").value || 0);
-	  total += parseInt(document.getElementById("custom-extra3").value || 0);
-	  total += parseInt(document.getElementById("custom-extra4").value || 0);
-	  total += parseInt(document.getElementById("custom-extra5").value || 0);
-	  total += parseInt(document.getElementById("custom-extra6").value || 0);
-	  total += parseInt(document.getElementById("custom-extra7").value || 0);
-	  total += parseInt(document.getElementById("custom-extra8").value || 0);
+      total += Math.floor(parseInt(document.getElementById("custom-extra1").value || 0) * 1250);
+      total += Math.floor(parseInt(document.getElementById("custom-extra2").value || 0));
+      total += Math.floor(parseInt(document.getElementById("custom-extra3").value || 0));
+      total += Math.floor(parseInt(document.getElementById("custom-extra4").value || 0));
+      total += Math.floor(parseInt(document.getElementById("custom-extra5").value || 0));
+      total += Math.floor(parseInt(document.getElementById("custom-extra6").value || 0));
+      total += Math.floor(parseInt(document.getElementById("custom-extra7").value || 0));
+      total += Math.floor(parseInt(document.getElementById("custom-extra8").value || 0));
+      total += Math.floor(parseInt(document.getElementById("custom-extra").value || 0));
 
-      resultInput.value = total;
+      resultInput.value = total.toLocaleString();
+      drawsInput.value = Math.floor(total / 3000) + Math.floor(parseInt(document.getElementById("custom-extra9").value || 0));
     }
 
     document.querySelectorAll("input").forEach(input => {
@@ -437,7 +438,7 @@
       input.addEventListener("change", calculate);
     });
   </script>
-  
+ 
   <div class="footer1">
     • 每週計算方式：<br>
     根據目標日期與當前日期之間的天數，自動計算出一個週數。<br>
