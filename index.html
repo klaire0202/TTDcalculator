@@ -447,8 +447,9 @@
     resultInput.value = total.toLocaleString();
 
     // 計算 drawsInput 的值，包含 data-value1 的額外數值
-    const extraValue = parseInt(checkbox.getAttribute("data-value1") || 0);
-    drawsInput.value = Math.floor(total / 3000) + Math.floor(parseInt(document.getElementById("custom-extra9").value || 0)) + extraValue;
+    //const extraValue = parseInt(checkbox.getAttribute("data-value1") || 0);
+	const extraValue = checkbox.checked ? parseInt(checkbox.getAttribute("data-value1") || 0) : 0;
+    drawsInput.value = Math.floor(total / 3000) + Math.floor(parseInt(document.getElementById("custom-extra9").value || 0)) + extraValue * days;
   }
 
   document.querySelectorAll("input").forEach(input => {
