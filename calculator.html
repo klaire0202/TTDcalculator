@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>排球少年 TOUCH THE DREAM 囤囤鼠小算盤</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+      background-color: #F2F6F7;
+    }
+
+    .title-image {
+      display: block;
+      max-width: 100%;
+      border-radius: 10px;
+      margin: 0 auto 10px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    label, input, select {
+      display: block;
+      margin-top: 10px;
+      width: 100%;
+    }
+
+    .toggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 8px;
+    }
+
+    .toggle:not(:last-child) {
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 8px;
+    }
+
+    .toggle label {
+	  flex-grow: 1;
+	  display: flex;
+	  flex-direction: column;
+	  justify-content: center;
+	  margin: 0;
+	}
+
+    .note {
+      font-size: 0.75em;
+      color: #666;
+      margin-top: 2px;
+    }
+
+    .section {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 15px;
+      margin-top: 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 1.1em;
+      font-weight: bold;
+      margin: 25px 0 5px;
+    }
+
+    .result {
+      font-size: 1.2em;
+      margin-top: 15px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    input[type="checkbox"] {
+      appearance: none;
+      width: 70px;
+      height: 35px;
+      background: #ccc;
+      border-radius: 20px;
+      position: relative;
+      outline: none;
+      cursor: pointer;
+      transition: background 0.3s;
+      box-sizing: border-box;
+    }
+
+    input[type="checkbox"]:checked {
+      background: #35A4FF;
+    }
+
+    input[type="checkbox"]::before {
+      content: "";
+      position: absolute;
+      width: 31px;
+      height: 31px;
+      border-radius: 50%;
+      background: white;
+      top: 2.3px;
+      left: 2px;
+      transition: transform 0.3s;
+      box-sizing: border-box;
+    }
+
+    input[type="checkbox"]:checked::before {
+      transform: translateX(26px);
+    }
+
+    @media (max-width: 600px) {
+      input[type="checkbox"] {
+        width: 60px;
+        height: 30px;
+      }
+
+      input[type="checkbox"]::before {
+        width: 26px;
+        height: 26px;
+        top: 2px;
+        left: 2px;
+      }
+
+      input[type="checkbox"]:checked::before {
+        transform: translateX(19px);
+      }
+    }
+
+    .input-row {
+	  display: flex;
+	  gap: 10px;
+	  flex-wrap: wrap;
+	  align-items: center;
+	  margin-top: 15px;
+	  border-bottom: 1px solid #ddd;
+	  padding-bottom: 8px;
+	  margin-bottom: 8px;
+	}
+
+	.section .input-row:last-child {
+	  border-bottom: none;
+	  margin-bottom: 0;
+	}
+
+    .input-row label {
+      flex: 1;
+      min-width: 120px;
+    }
+
+    .input-row input[type="number"],
+    .input-row input[type="date"] {
+      flex: 0.5;
+      padding: 10px;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      height: 30px;
+    }
+
+    .result-box {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .result-box label {
+      flex: 1;
+      font-weight: bold;
+    }
+
+    .result-box input {
+      flex: 0.5;
+      padding: 10px;
+      font-size: 1em;
+      font-weight: bold;
+      text-align: center;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      height: 30px;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 0.9em;
+      margin-top: 30px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <img src="https://i.imgur.com/8SCvUon.jpeg" alt="排球少年封面" class="title-image">
+
+  <div class="header">
+    <h1>排球少年 TOUCH THE DREAM<br>囤囤鼠小算盤</h1>
+  </div>
+
+  <!-- 每日 -->
+  <div class="section-title">每日</div>
+  <div class="section">
+    <div class="toggle">
+      <label>每日任務<div class="note">300 • 每日任務全做完</div></label>
+      <input type="checkbox" class="daily" value="300" checked>
+    </div>
+    <div class="toggle">
+      <label>上線獎勵<div class="note">105 • 上線獎勵滿2小時</div></label>
+      <input type="checkbox" class="daily" value="105" checked>
+    </div>
+    <div class="toggle">
+      <label>看廣告<div class="note">430 • 每日儲值禮包+商店皆看完廣告(共8次廣告)</div></label>
+      <input type="checkbox" class="daily" value="430" checked>
+    </div>
+    <div class="toggle">
+      <label>PVP獎勵<div class="note">100 • PVP每日獎勵</div></label>
+      <input type="checkbox" class="daily" value="100" checked>
+    </div>
+    <div class="toggle">
+      <label>活動商店<div class="note">100 • 活動商店每日兌換</div></label>
+      <input type="checkbox" class="daily" value="100" checked>
+    </div>
+	<div class="toggle">
+      <label>日服：活動任務DM四場獎勵<div class="note">100 • 活動任務DM打4場每日獎勵</div></label>
+      <input type="checkbox" class="daily" value="100">
+    </div>
+	<div class="toggle">
+      <label>日向烏鴉遊戲機<div class="note">20 • 日向烏鴉遊戲機每日獎勳</div></label>
+      <input type="checkbox" class="daily" value="20" checked>
+    </div>
+    <div class="toggle">
+      <label>每日房間撿垃圾20次<div class="note">15 • 每日房間撿垃圾20次(估算15)</div></label>
+      <input type="checkbox" class="daily" value="15" checked>
+    </div>
+    <div class="input-row">
+      <label for="custom-daily">其他<div class="note">其他每日固定獲得的翅膀(翼)</div></label>
+      <input type="number" id="custom-daily" value="0" />
+    </div>
+  </div>
+
+  <!-- 每週 -->
+  <div class="section-title">每週</div>
+  <div class="section">
+    <div class="toggle">
+      <label>每週任務<div class="note">450 • 每日任務全做完</div></label>
+      <input type="checkbox" class="weekly" value="450" checked>
+    </div>
+    <div class="input-row">
+      <label for="custom-weekly">其他<div class="note">其他每週固定獲得的翅膀(翼)</div></label>
+      <input type="number" id="custom-weekly" value="0" />
+    </div>
+  </div>
+
+  <!-- 每月 -->
+  <div class="section-title">每月</div>
+  <div class="section">
+    <div class="toggle">
+      <label>每日簽到<div class="note">1000 • 每日簽到估算30天為1000</div></label>
+      <input type="checkbox" class="monthly" value="1000" checked>
+    </div>
+    <div class="toggle">
+      <label>排球Pass（通行證）<div class="note">800 • 無課通行證任務全拿完</div></label>
+      <input type="checkbox" class="monthly" value="800" checked>
+    </div>
+    <div class="input-row">
+      <label for="custom-monthly">其他<div class="note">其他每月固定獲得的翅膀(翼)</div></label>
+      <input type="number" id="custom-monthly" value="0" />
+    </div>
+  </div>
+  
+  <!-- 儲值 -->
+  <div class="section-title">儲值</div>
+  <div class="section">
+    <div class="toggle">
+      <label>每日儲值禮包<div class="note">900 • 每日儲值禮包90元新台幣</div></label>
+      <input type="checkbox" class="daily" value="900">
+    </div>
+	<div class="toggle">
+      <label>排球Pass禮包（通行證）<div class="note">3600 • 額外購買通行證190元新台幣</div></label>
+      <input type="checkbox" class="monthly" value="3600">
+    </div>
+    <div class="toggle">
+      <label>月卡（簽到禮包）<div class="note">100 • 不含購買時送的1250翅膀(翼)，月卡220元新台幣</div></label>
+      <input type="checkbox" class="daily" value="100">
+    </div>
+	<div class="input-row">
+      <label for="custom-extra1">月卡（簽到禮包）開通的1250<div class="note">1250 • 請填寫預計會領取幾次</div><div class="note">例如：預計還有三次需領取，填寫 3 即可</div></label>
+      <input type="number" id="custom-extra1" class="extra" value="0" />
+    </div>
+  </div>
+
+  <!-- 額外 -->
+  <div class="section-title">額外附加</div>
+  <div class="section">
+    <div class="toggle">
+      <label>系統維護<div class="note">300 • 系統維護更新補償300</div></label>
+      <input type="checkbox" class="extra" value="300">
+    </div>
+	<div class="input-row">
+      <label for="custom-extra2">活動關卡<div class="note">請直接填寫預計還有多少翅膀可領取</div><div class="note">(等台服活動固定皆為100翅膀便會更改填寫關卡數即可)</div></label>
+      <input type="number" id="custom-extra2" value="0" />
+    </div>
+	<div class="input-row">
+      <label for="custom-extra3">PVP預計排行獎勵<div class="note">請直接填寫預計會領取多少翅膀</div><div class="note">(積分滿7680且未達前100名：2000)</div></label>
+      <input type="number" id="custom-extra3" value="0" />
+    </div>
+	<div class="input-row">
+      <label for="custom-extra4">DM夢幻比賽預計排行獎勵<div class="note">請直接填寫預計會領取多少翅膀</div><div class="note">(積分為200：440)</div></label>
+      <input type="number" id="custom-extra4" value="0" />
+    </div>
+	<div class="input-row">
+      <label for="custom-extra5">日向烏鴉遊戲機預計排行獎勵<div class="note">請直接填寫預計會領取多少翅膀</div><div class="note">(第101名～前10%：130)</div></label>
+      <input type="number" id="custom-extra5" value="0" />
+    </div>
+	<div class="input-row">
+      <label for="custom-extra6">日向烏鴉一期活動遊戲機累計獎勵<div class="note">請直接填寫預計會領取多少翅膀</div><div class="note">(一期為60，一期為天)</div></label>
+      <input type="number" id="custom-extra6" value="0" />
+    </div>
+	<div class="input-row">
+      <label for="custom-extra7">日服：活動預計排行獎勵<div class="note">請直接填寫預計會領取多少翅膀</div><div class="note">(第101名～前10%：1200)</div></label>
+      <input type="number" id="custom-extra7" value="0" />
+    </div>
+	<div class="input-row">
+      <label for="custom-extra8">日服：活動消耗活動幣獎勵<div class="note">請直接填寫預計會領取多少翅膀</div><div class="note">(一期活動為800)</div></label>
+      <input type="number" id="custom-extra8" value="0" />
+    </div>
+    <div class="input-row">
+      <label for="custom-extra">其他額外</label>
+      <input type="number" id="custom-extra" value="0" />
+    </div>
+  </div>
+
+  <!-- 目前狀況 -->
+  <div class="section-title">目前狀況</div>
+  <div class="section">
+	<div class="input-row">
+		<label for="current">
+			<img src="https://i.imgur.com/nz2tlDG.jpeg" alt="翅膀" style="width: 50px; height: 50px; vertical-align: middle; margin-right: 6px;">
+			翅膀（翼）
+		</label>
+		<input type="number" id="current" value="0" />
+	</div>
+	<div class="input-row">
+		<label for="current1">
+			<img src="https://i.imgur.com/vUrY1hG.jpeg" alt="白金卷" style="width: 50px; height: 50px; vertical-align: middle; margin-right: 6px;">
+			白金券
+		</label>
+		<input type="number" id="current1" value="0" />
+	</div>
+	<div class="input-row">
+		<label for="target-date">目標日期</label>
+		<input type="date" id="target-date" />
+	</div>
+  </div>
+  
+  <!-- 結果 -->
+  <div class="section-title">結果</div>
+  <div class="section result-box">
+    <label for="result">預計可存到翅膀數量</label>
+    <input type="text" id="result" readonly />
+  </div>
+
+
+  <!-- 計算邏輯 -->
+  <script>
+    const currentInput = document.getElementById("current");
+    const targetDateInput = document.getElementById("target-date");
+    const resultInput = document.getElementById("result");
+
+    function calcDays(start, end) {
+      const ms = end - start;
+      return Math.ceil(ms / (1000 * 60 * 60 * 24));
+    }
+
+    function calculate() {
+      const today = new Date();
+      const target = new Date(targetDateInput.value);
+      if (isNaN(target)) return;
+
+      const days = calcDays(today, target);
+      const weeks = Math.floor(days / 7);
+      const months = Math.floor(days / 30);
+
+      let total = parseInt(currentInput.value || 0);
+
+      document.querySelectorAll(".daily:checked").forEach(el => {
+        total += parseInt(el.value) * days;
+      });
+
+      document.querySelectorAll(".weekly:checked").forEach(el => {
+        total += parseInt(el.value) * weeks;
+      });
+
+      document.querySelectorAll(".monthly:checked").forEach(el => {
+        total += parseInt(el.value) * months;
+      });
+
+      document.querySelectorAll(".extra:checked").forEach(el => {
+        total += parseInt(el.value);
+      });
+
+      total += parseInt(document.getElementById("custom-daily").value || 0) * days;
+      total += parseInt(document.getElementById("custom-weekly").value || 0) * weeks;
+      total += parseInt(document.getElementById("custom-monthly").value || 0) * months;
+      total += parseInt(document.getElementById("custom-extra").value || 0); 
+	  //total += parseInt(document.getElementById("current1").value || 0) * 300;
+	  
+	  total += parseInt(document.getElementById("custom-extra1").value || 0)* 1250;
+	  total += parseInt(document.getElementById("custom-extra2").value || 0);
+	  total += parseInt(document.getElementById("custom-extra3").value || 0);
+	  total += parseInt(document.getElementById("custom-extra4").value || 0);
+	  total += parseInt(document.getElementById("custom-extra5").value || 0);
+	  total += parseInt(document.getElementById("custom-extra6").value || 0);
+	  total += parseInt(document.getElementById("custom-extra7").value || 0);
+	  total += parseInt(document.getElementById("custom-extra8").value || 0);
+
+      resultInput.value = total;
+    }
+
+    document.querySelectorAll("input").forEach(input => {
+      input.addEventListener("input", calculate);
+      input.addEventListener("change", calculate);
+    });
+  </script>
+
+  <div class="footer">
+    以上由xx提供，數值以遊戲裡的為主<br>
+    若有問題請聯繫xx
+  </div>
+
+</body>
+</html>
