@@ -386,15 +386,12 @@
   
   checkbox.addEventListener("change", function() {
     if (checkbox.checked) {
-      // 取得勾選框的數值和額外數值
       const value = checkbox.value;
       const extraValue = checkbox.getAttribute("data-value1");
 
-      // 在此可以根據需要進行處理，這裡我們不顯示結果
       console.log(`每日儲值禮包數值: ${value}`);
       console.log(`額外數值: ${extraValue}`);
     } else {
-      // 當未勾選時的處理
       console.log("未勾選每日儲值禮包");
     }
   });
@@ -442,8 +439,6 @@
 
     resultInput.value = total.toLocaleString();
 
-    // 計算 drawsInput 的值，包含 data-value1 的額外數值
-    //const extraValue = parseInt(checkbox.getAttribute("data-value1") || 0);
 	const extraValue = checkbox.checked ? parseInt(checkbox.getAttribute("data-value1") || 0) : 0;
     drawsInput.value = Math.floor(total / 3000) + Math.floor(parseInt(document.getElementById("custom-extra9").value || 0)) + extraValue * days;
   }
