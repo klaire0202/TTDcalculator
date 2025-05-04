@@ -430,6 +430,10 @@
       total += Math.floor(parseInt(el.value) * months);
     });
 
+    document.querySelectorAll(".extra:checked").forEach(el => {
+        total += parseInt(el.value);
+    });
+
     total += Math.floor(parseInt(document.getElementById("custom-daily").value || 0) * days);
     total += Math.floor(parseInt(document.getElementById("custom-weekly").value || 0) * weeks);
     total += Math.floor(parseInt(document.getElementById("custom-monthly").value || 0) * months);
