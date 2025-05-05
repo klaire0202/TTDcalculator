@@ -210,7 +210,7 @@
   <div class="header">
     <h1>排球少年 TOUCH THE DREAM<br>囤囤鼠小算盤</h1>
   </div>
-	
+
   <div class="section-title">每日</div>
   <div class="section">
     <div class="toggle">
@@ -278,7 +278,7 @@
       <input type="number" id="custom-monthly" value="0" />
     </div>
   </div>
-  
+
   <div class="section-title">儲值</div>
   <div class="section">
     <div class="toggle">
@@ -357,9 +357,11 @@
 	</div>
 
 	<div class="input-row">
+		
 		<label for="target-date">
 		  目標日期 <span style="color: red; font-size: 0.8em; margin-left: 4px;">*必填</span>
 		</label>
+
 		<input type="date" id="target-date" />
 	</div>
   </div>
@@ -382,17 +384,20 @@
   const checkbox = document.getElementById("custom-extra10");
 
   function calcDays(start, end) {
-    const ms = end - start;
-    return Math.ceil(ms / (1000 * 60 * 60 * 24));
+    const startDate = new Date(start.getFullYear(), start.getMonth(), start.getDate());
+    const endDate = new Date(end.getFullYear(), end.getMonth(), end.getDate());
+    const msPerDay = 1000 * 60 * 60 * 24;
+    const diff = (endDate - startDate) / msPerDay;
+    return Math.floor(diff) + 1;
   }
   
   checkbox.addEventListener("change", function() {
     if (checkbox.checked) {
-      const value = checkbox.value;
+	  const value = checkbox.value;
       const extraValue = checkbox.getAttribute("data-value1");
-
-      console.log(`每日儲值禮包數值: ${value}`);
-      console.log(`額外數值: ${extraValue}`);
+	  
+      console.log(`每日儲值禮包數值: ${checkbox.value}`);
+      console.log(`額外數值: ${checkbox.getAttribute("data-value1")}`);
     } else {
       console.log("未勾選每日儲值禮包");
     }
@@ -410,50 +415,48 @@
     let total = parseInt(currentInput.value || 0);
 
     document.querySelectorAll(".daily:checked").forEach(el => {
-      total += Math.floor(parseInt(el.value) * days);
+      total += parseInt(el.value) * days;
     });
 
     document.querySelectorAll(".weekly:checked").forEach(el => {
-      total += Math.floor(parseInt(el.value) * weeks);
+      total += parseInt(el.value) * weeks;
     });
 
     document.querySelectorAll(".monthly:checked").forEach(el => {
-      total += Math.floor(parseInt(el.value) * months);
+      total += parseInt(el.value) * months;
     });
 
     document.querySelectorAll(".extra:checked").forEach(el => {
-        total += parseInt(el.value);
+      total += parseInt(el.value);
     });
 
-    total += Math.floor(parseInt(document.getElementById("custom-daily").value || 0) * days);
-    total += Math.floor(parseInt(document.getElementById("custom-weekly").value || 0) * weeks);
-    total += Math.floor(parseInt(document.getElementById("custom-monthly").value || 0) * months);
+    total += parseInt(document.getElementById("custom-daily").value || 0) * days;
+    total += parseInt(document.getElementById("custom-weekly").value || 0) * weeks;
+    total += parseInt(document.getElementById("custom-monthly").value || 0) * months;
 
-    total += Math.floor(parseInt(document.getElementById("custom-extra1").value || 0) * 1250);
-    total += Math.floor(parseInt(document.getElementById("custom-extra2").value || 0));
-    total += Math.floor(parseInt(document.getElementById("custom-extra3").value || 0));
-    total += Math.floor(parseInt(document.getElementById("custom-extra4").value || 0));
-    total += Math.floor(parseInt(document.getElementById("custom-extra5").value || 0));
-    total += Math.floor(parseInt(document.getElementById("custom-extra6").value || 0));
-    total += Math.floor(parseInt(document.getElementById("custom-extra7").value || 0));
-    total += Math.floor(parseInt(document.getElementById("custom-extra8").value || 0));
-    total += Math.floor(parseInt(document.getElementById("custom-extra").value || 0));
+    total += parseInt(document.getElementById("custom-extra1").value || 0) * 1250;
+    [2,3,4,5,6,7,8].forEach(i => {
+      total += parseInt(document.getElementById(`custom-extra${i}`).value || 0);
+    });
+    total += parseInt(document.getElementById("custom-extra").value || 0);
 
     resultInput.value = total.toLocaleString();
 
-	const extraValue = checkbox.checked ? parseInt(checkbox.getAttribute("data-value1") || 0) : 0;
-    drawsInput.value = Math.floor(total / 3000) + Math.floor(parseInt(document.getElementById("custom-extra9").value || 0)) + extraValue * days;
+    const extraValue = checkbox.checked ? parseInt(checkbox.getAttribute("data-value1")) : 0;
+    drawsInput.value = Math.floor(total / 3000) + parseInt(document.getElementById("custom-extra9").value || 0) + extraValue * days;
   }
 
   document.querySelectorAll("input").forEach(input => {
     input.addEventListener("input", calculate);
     input.addEventListener("change", calculate);
   });
-</script>
+  </script>
 
  
   <div class="footer1">
     • 翅膀(翼)與白金劵為獨立計算，並不存在白金劵換算成翅膀(翼)，白金劵僅會計算抽數。<br><br>
+
+	• 以上計算皆包含當日會領取的翅膀(翼)及白金劵數量<br><br>
 
     • 每週計算方式：<br>
     根據目標日期與當前日期之間的天數，自動計算出一個週數。<br>
