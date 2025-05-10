@@ -262,6 +262,14 @@
       <input type="number" id="custom-weekly" value="0" />
     </div>
   </div>
+  
+  <div class="section-title">每兩週</div>
+  <div class="section">
+    <div class="toggle">
+      <label>日向烏鴉一期活動遊戲機累計獎勵<div class="note">60 • 日向烏鴉一期活動遊戲機拿滿累計獎勵(一期14天)</div></label>
+      <input type="checkbox" class="weekly2" value="60" checked>
+    </div>
+  </div>
 
   <div class="section-title">每月</div>
   <div class="section">
@@ -322,16 +330,12 @@
       <input type="number" id="custom-extra5" value="0" />
     </div>
 	<div class="input-row">
-      <label for="custom-extra6">日向烏鴉一期活動遊戲機累計獎勵<div class="note">請直接填寫預計會領取多少翅膀</div><div class="note">(一期為60)</div></label>
+      <label for="custom-extra6">日服：活動預計排行獎勵<div class="note">請直接填寫預計會領取多少翅膀</div><div class="note">(第101名～前10%：1200)</div></label>
       <input type="number" id="custom-extra6" value="0" />
     </div>
 	<div class="input-row">
-      <label for="custom-extra7">日服：活動預計排行獎勵<div class="note">請直接填寫預計會領取多少翅膀</div><div class="note">(第101名～前10%：1200)</div></label>
+      <label for="custom-extra7">日服：活動消耗活動幣獎勵<div class="note">請直接填寫預計會領取多少翅膀</div><div class="note">(一期活動為800)</div></label>
       <input type="number" id="custom-extra7" value="0" />
-    </div>
-	<div class="input-row">
-      <label for="custom-extra8">日服：活動消耗活動幣獎勵<div class="note">請直接填寫預計會領取多少翅膀</div><div class="note">(一期活動為800)</div></label>
-      <input type="number" id="custom-extra8" value="0" />
     </div>
     <div class="input-row">
       <label for="custom-extra">其他額外</label>
@@ -349,11 +353,11 @@
 		<input type="number" id="current" value="0" />
 	</div>
 	<div class="input-row">
-		<label for="custom-extra9">
+		<label for="custom-extra8">
 			<img src="https://i.imgur.com/vUrY1hG.jpeg" alt="白金券" style="width: 50px; height: 50px; vertical-align: middle; margin-right: 6px;">
 			白金劵
 		</label>
-		<input type="number" id="custom-extra9" value="0" />
+		<input type="number" id="custom-extra8" value="0" />
 	</div>
 
 	<div class="input-row">
@@ -410,6 +414,7 @@
 
     const days = calcDays(today, target);
     const weeks = Math.floor(days / 7);
+	const weeks2 = Math.floor(days / 14);
     const months = Math.floor(days / 30);
 
     let total = parseInt(currentInput.value || 0);
@@ -420,6 +425,10 @@
 
     document.querySelectorAll(".weekly:checked").forEach(el => {
       total += parseInt(el.value) * weeks;
+    });
+	
+	document.querySelectorAll(".weekly2:checked").forEach(el => {
+      total += parseInt(el.value) * weeks2;
     });
 
     document.querySelectorAll(".monthly:checked").forEach(el => {
@@ -435,7 +444,7 @@
     total += parseInt(document.getElementById("custom-monthly").value || 0) * months;
 
     total += parseInt(document.getElementById("custom-extra1").value || 0) * 1250;
-    [2,3,4,5,6,7,8].forEach(i => {
+    [2,3,4,5,6,7].forEach(i => {
       total += parseInt(document.getElementById(`custom-extra${i}`).value || 0);
     });
     total += parseInt(document.getElementById("custom-extra").value || 0);
@@ -443,7 +452,7 @@
     resultInput.value = total.toLocaleString();
 
     const extraValue = checkbox.checked ? parseInt(checkbox.getAttribute("data-value1")) : 0;
-    drawsInput.value = Math.floor(total / 300) + parseInt(document.getElementById("custom-extra9").value || 0) + extraValue * days;
+    drawsInput.value = Math.floor(total / 300) + parseInt(document.getElementById("custom-extra8").value || 0) + extraValue * days;
   }
 
   document.querySelectorAll("input").forEach(input => {
