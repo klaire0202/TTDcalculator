@@ -234,8 +234,8 @@
       <input type="checkbox" class="daily" value="100" checked>
     </div>
 	<div class="toggle">
-      <label>日服：活動任務DM四場獎勵<div class="note">100 • 活動任務DM打4場每日獎勵</div></label>
-      <input type="checkbox" class="daily" value="100">
+      <label>活動任務DM四場獎勵<div class="note">100 • 活動任務DM打4場每日獎勵</div></label>
+      <input type="checkbox" class="daily" value="100" checked>
     </div>
 	<div class="toggle">
       <label>日向烏鴉遊戲機<div class="note">20 • 日向烏鴉遊戲機每日獎勳</div></label>
@@ -318,8 +318,16 @@
       <input type="checkbox" class="extra" value="300">
     </div>
 	<div class="input-row">
-      <label for="custom-extra2">活動關卡<div class="note">請直接填寫預計還有多少翅膀可領取</div><div class="note">(等台服活動固定皆為100翅膀便會更改填寫關卡數即可)</div></label>
+      <label for="custom-extra2">活動關卡<div class="note">請直接填寫預計還有多少「關卡」可領取</div><div class="note">(1關：100)</div></label>
       <input type="number" id="custom-extra2" value="0" />
+    </div>
+	<div class="input-row">
+      <label for="custom-extra6">活動預計排行獎勵<div class="note">請直接填寫預計會領取多少翅膀</div><div class="note">(第101名～前10%：1200)</div></label>
+      <input type="number" id="custom-extra6" value="0" />
+    </div>
+	<div class="input-row">
+      <label for="custom-extra7">活動消耗活動幣獎勵<div class="note">請直接填寫預計會領取多少翅膀</div><div class="note">(一期活動為800、10張白金劵，白金劵請寫入目前財產的格子裡)</div></label>
+      <input type="number" id="custom-extra7" value="0" />
     </div>
 	<div class="input-row">
       <label for="custom-extra3">PVP預計排行獎勵<div class="note">請直接填寫預計會領取多少翅膀</div><div class="note">(積分滿7680且未達前100名：2000)</div></label>
@@ -332,14 +340,6 @@
 	<div class="input-row">
       <label for="custom-extra5">日向烏鴉遊戲機預計排行獎勵<div class="note">請直接填寫預計會領取多少翅膀</div><div class="note">(第101名～前10%：130)</div></label>
       <input type="number" id="custom-extra5" value="0" />
-    </div>
-	<div class="input-row">
-      <label for="custom-extra6">日服：活動預計排行獎勵<div class="note">請直接填寫預計會領取多少翅膀</div><div class="note">(第101名～前10%：1200)</div></label>
-      <input type="number" id="custom-extra6" value="0" />
-    </div>
-	<div class="input-row">
-      <label for="custom-extra7">日服：活動消耗活動幣獎勵<div class="note">請直接填寫預計會領取多少翅膀</div><div class="note">(一期活動為800、10張白金劵，白金劵請寫入目前財產的格子裡)</div></label>
-      <input type="number" id="custom-extra7" value="0" />
     </div>
     <div class="input-row">
       <label for="custom-extra">其他額外</label>
@@ -448,7 +448,8 @@
     total += parseInt(document.getElementById("custom-monthly").value || 0) * months;
 
     total += parseInt(document.getElementById("custom-extra1").value || 0) * 1250;
-    [2,3,4,5,6,7].forEach(i => {
+	total += parseInt(document.getElementById("custom-extra2").value || 0) * 100;
+    [3,4,5,6,7].forEach(i => {
       total += parseInt(document.getElementById(`custom-extra${i}`).value || 0);
     });
     total += parseInt(document.getElementById("custom-extra").value || 0);
@@ -486,4 +487,3 @@
 
 </body>
 </html>
-
