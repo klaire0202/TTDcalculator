@@ -202,10 +202,47 @@
       margin-top: 30px;
       color: #666;
     }
+	
+	.seg-wrapper{
+  width:100%;
+  max-width:1200px;
+  display:flex;
+  gap:0;
+  margin:0 0 20px 0;
+  }
+
+  .seg-btn{
+    padding:8px 18px;
+    text-decoration:none;
+    font-size:15px;
+    color:#606262;
+    background:#F2F6FF;
+    border:1px solid #D8DCE4;
+    transition:0.2s;
+    display:inline-block;
+  }
+
+  .seg-btn.left{
+    border-radius:12px 0 0 12px;
+  }
+
+  .seg-btn.right{
+    border-radius:0 12px 12px 0;
+    border-left:0;
+  }
+
+  .seg-btn:hover{
+    background:#CDD9F0;
+  }
   </style>
 </head>
 <body>
   <img src="https://i.imgur.com/8SCvUon.jpeg" alt="排球少年封面" class="title-image">
+
+  <div class="seg-wrapper">
+    <a href="https://ttdcalculator.vercel.app/" class="seg-btn left">囤囤鼠小算盤</a>
+    <a href="https://tt-dcalendar.vercel.app/" class="seg-btn right">卡池日曆</a>
+  </div>
 
   <div class="header">
     <h1>排球少年 TOUCH THE DREAM<br>囤囤鼠小算盤</h1>
@@ -491,5 +528,3 @@
 
 </body>
 </html>
-
-
